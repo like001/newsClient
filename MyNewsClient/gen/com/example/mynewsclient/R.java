@@ -135,25 +135,79 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int back=0x7f020000;
+        public static final int bottom_tab_bg=0x7f020001;
+        public static final int btn_tab_gov_selector=0x7f020002;
+        public static final int btn_tab_home_selector=0x7f020003;
+        public static final int btn_tab_news_selector=0x7f020004;
+        public static final int btn_tab_setting_selector=0x7f020005;
+        public static final int btn_tab_smart_selector=0x7f020006;
+        public static final int btn_tab_text_selector=0x7f020007;
+        public static final int button_red_normal=0x7f020008;
+        public static final int button_red_pressed=0x7f020009;
+        public static final int common_listview_headview_red_arrow=0x7f02000a;
+        public static final int girl4=0x7f02000b;
+        public static final int govaffairs=0x7f02000c;
+        public static final int govaffairs_press=0x7f02000d;
+        public static final int guide_1=0x7f02000e;
+        public static final int guide_2=0x7f02000f;
+        public static final int guide_3=0x7f020010;
+        public static final int home=0x7f020011;
+        public static final int home_press=0x7f020012;
+        public static final int ic_launcher=0x7f020013;
+        public static final int icon_150=0x7f020014;
+        public static final int icon_pic_grid_type=0x7f020015;
+        public static final int icon_pic_list_type=0x7f020016;
+        public static final int icon_share=0x7f020017;
+        public static final int icon_textsize=0x7f020018;
+        public static final int image_demo=0x7f020019;
+        public static final int img_menu=0x7f02001a;
+        public static final int menu_arr_normal=0x7f02001b;
+        public static final int menu_arr_select=0x7f02001c;
+        public static final int news_cate_arr=0x7f02001d;
+        public static final int news_pic_default=0x7f02001e;
+        public static final int newscenter=0x7f02001f;
+        public static final int newscenter_press=0x7f020020;
+        public static final int pic_item_list_default=0x7f020021;
+        public static final int pic_list_item_bg=0x7f020022;
+        public static final int setting=0x7f020023;
+        public static final int setting_press=0x7f020024;
+        public static final int smartservice=0x7f020025;
+        public static final int smartservice_press=0x7f020026;
+        public static final int splash_bg_newyear=0x7f020027;
+        public static final int splash_horse_newyear=0x7f020028;
+        public static final int ssdk_oks_ptr_ptr=0x7f020029;
+        public static final int title_red_bg=0x7f02002a;
+        public static final int topnews_item_default=0x7f02002b;
     }
     public static final class id {
         public static final int fl_content=0x7f050006;
-        public static final int fl_left_menu=0x7f050007;
+        public static final int fl_left_menu=0x7f050011;
         public static final int fullscreen=0x7f050003;
+        public static final int ibt_menu=0x7f050007;
         public static final int left=0x7f050001;
         public static final int margin=0x7f050004;
         public static final int none=0x7f050005;
+        public static final int rb_gov=0x7f05000f;
+        public static final int rb_home=0x7f05000c;
+        public static final int rb_news=0x7f05000d;
+        public static final int rb_set=0x7f050010;
+        public static final int rb_smart=0x7f05000e;
+        public static final int rg_bottom=0x7f05000b;
         public static final int right=0x7f050002;
+        public static final int rl_content=0x7f050009;
         public static final int selected_view=0x7f050000;
-        public static final int slidingmenumain=0x7f050008;
+        public static final int slidingmenumain=0x7f050012;
+        public static final int tv_title=0x7f050008;
+        public static final int vp_bottom=0x7f05000a;
     }
     public static final class layout {
         public static final int activity_main=0x7f040000;
-        public static final int fragment_content=0x7f040001;
-        public static final int fragment_left_menu=0x7f040002;
-        public static final int left_menu=0x7f040003;
-        public static final int slidingmenumain=0x7f040004;
+        public static final int base_bottom_button_pager=0x7f040001;
+        public static final int fragment_content=0x7f040002;
+        public static final int fragment_left_menu=0x7f040003;
+        public static final int left_menu=0x7f040004;
+        public static final int slidingmenumain=0x7f040005;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
@@ -180,6 +234,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
+        /**  低栏RadioButton的样式 
+         */
+        public static final int BottomTabStyle=0x7f080002;
     }
     public static final class styleable {
         /** Attributes that can be used with a SlidingMenu.

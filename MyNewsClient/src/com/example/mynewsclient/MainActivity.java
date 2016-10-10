@@ -12,6 +12,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
+/*
+ * 主界面
+ * */
 public class MainActivity extends SlidingFragmentActivity {
 
 	
@@ -22,6 +26,8 @@ public void onCreate(Bundle savedInstanceState) {
 	// TODO Auto-generated method stub
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main);
+	
+	//侧边栏的布局文件
 	setBehindContentView(R.layout.left_menu);
 	SlidingMenu slidingMenu = getSlidingMenu();
 	slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
@@ -32,7 +38,7 @@ public void onCreate(Bundle savedInstanceState) {
 }
 
 
-//初始化左边侧边栏的fragment，使用fragment来填充侧边栏
+//初始化左边侧边栏的fragment，使用fragment来填充侧边栏和主界面
 private void initFragment() {
 	// TODO Auto-generated method stub
 	FragmentManager fragmentManager = getSupportFragmentManager();
