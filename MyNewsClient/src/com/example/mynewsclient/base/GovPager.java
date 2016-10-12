@@ -13,7 +13,7 @@ public class GovPager extends BaseBottomButtonPager {
 
 	@Override
 	public void initData() {
-		mTextView.setText("ÕþÎñ");
+		mTextView.setText("æ”¿åºœåœ¨çº¿");
 		//mFrameLayout.setBackgroundResource(R.drawable.girl1);
 	}
 

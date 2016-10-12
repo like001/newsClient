@@ -6,15 +6,17 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
 
 /*
- * Ö÷½çÃæ
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * */
 public class MainActivity extends SlidingFragmentActivity {
 
@@ -26,8 +28,8 @@ public void onCreate(Bundle savedInstanceState) {
 	// TODO Auto-generated method stub
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main);
-	
-	//²à±ßÀ¸µÄ²¼¾ÖÎÄ¼ş
+	//requestWindowFeature();
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 	setBehindContentView(R.layout.left_menu);
 	SlidingMenu slidingMenu = getSlidingMenu();
 	slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
@@ -38,7 +40,7 @@ public void onCreate(Bundle savedInstanceState) {
 }
 
 
-//³õÊ¼»¯×ó±ß²à±ßÀ¸µÄfragment£¬Ê¹ÓÃfragmentÀ´Ìî³ä²à±ßÀ¸ºÍÖ÷½çÃæ
+//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ß²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½fragmentï¿½ï¿½Ê¹ï¿½ï¿½fragmentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 private void initFragment() {
 	// TODO Auto-generated method stub
 	FragmentManager fragmentManager = getSupportFragmentManager();
@@ -47,4 +49,24 @@ private void initFragment() {
 	transaction.replace(R.id.fl_content, new ContentFragment(),FRAGMENT_CONTENT );
 	transaction.commit();
 }
+
+
+// è·å–ä¾§è¾¹æ fragment
+public LeftFragment getLeftMenuFragment() {
+	FragmentManager fm = getSupportFragmentManager();
+	LeftFragment fragment = (LeftFragment) fm
+			.findFragmentByTag(FRAGMENT_LEFT_MENU);
+
+	return fragment;
+}
+
+// è·å–ä¸»é¡µé¢fragment
+public ContentFragment getContentFragment() {
+	FragmentManager fm = getSupportFragmentManager();
+	ContentFragment fragment = (ContentFragment) fm
+			.findFragmentByTag(FRAGMENT_CONTENT);
+
+	return fragment;
+}
+
 }

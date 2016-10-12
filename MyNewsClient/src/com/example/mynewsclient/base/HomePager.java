@@ -13,7 +13,7 @@ public class HomePager extends BaseBottomButtonPager {
 
 	@Override
 	public void initData() {
-		mTextView.setText("Ö÷Ò³");
+		mTextView.setText("ä¸»é¡µ");
 		//
 		
 	}

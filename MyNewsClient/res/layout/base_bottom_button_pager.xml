@@ -15,8 +15,7 @@
             android:background="@drawable/img_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            
+            android:layout_centerVertical="true"            
             />
         <TextView android:id="@+id/tv_title"
             android:textColor="#fff"
@@ -26,7 +25,7 @@
             android:layout_centerInParent="true"/>
     </RelativeLayout> 
         <FrameLayout 
-            android:id="@+id/rl_content"
+            android:id="@+id/fl_title_down"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"

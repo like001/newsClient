@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 
-/**µ×²¿°´Å¥ÓÃÓÚÇÐ»»Ò³Ãæ£¬ÕâÊÇÇÐ»»Ò³ÃæµÄ»ùÀà
+/**ï¿½×²ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½Ò³ï¿½æ£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½Ò³ï¿½ï¿½Ä»ï¿½ï¿½ï¿½
  */
 public abstract class BaseBottomButtonPager {
 
@@ -24,14 +24,14 @@ public abstract class BaseBottomButtonPager {
 		// TODO Auto-generated constructor stub
 		mActivity=activity;
 		initViews();
-		initData();
+		//initData();
 	}
 
 	private void initViews() {
 		mView = View.inflate(mActivity,R.layout.base_bottom_button_pager , null);
 		mImageButton = (ImageButton) mView.findViewById(R.id.ibt_menu);
 		mTextView = (TextView) mView.findViewById(R.id.tv_title);
-		mFrameLayout = (FrameLayout) mView.findViewById(R.id.fl_content);
+		mFrameLayout = (FrameLayout) mView.findViewById(R.id.fl_title_down);
 	}
 	
 	abstract public void initData();

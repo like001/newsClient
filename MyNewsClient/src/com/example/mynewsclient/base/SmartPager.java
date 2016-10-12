@@ -13,7 +13,7 @@ public class SmartPager extends BaseBottomButtonPager{
 
 	@Override
 	public void initData() {
-		mTextView.setText("ÖÇÄÜÕşÎñ");
+		mTextView.setText("æ™ºèƒ½æ”¿åŠ¡");
 		//mFrameLayout.setBackgroundResource(R.drawable.girl4);
 	}
 

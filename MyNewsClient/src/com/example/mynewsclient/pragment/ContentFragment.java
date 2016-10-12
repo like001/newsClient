@@ -12,7 +12,9 @@ import com.example.mynewsclient.base.SetPager;
 import com.example.mynewsclient.base.SmartPager;
 import com.example.mynewsclient.view.NoScrollViewPager;
 
+import android.net.UrlQuerySanitizer.IllegalCharacterValueSanitizer;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
@@ -20,18 +22,18 @@ import android.widget.RadioGroup;
 
 public class ContentFragment extends BaseFragment {
 
-	View mView;//Õû¸öµÄLayout²¼¾Ö
-	NoScrollViewPager mNoScrollViewPager;//ÉÏÃæµÄViewPager
-	RadioGroup mRadioGroup;//µ×²¿µÄÑ¡Ôñ×é
-	RadioButton rbHome;//Ã¿Ò»¸öÑ¡ÔñÏî
+	View mView;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Layoutï¿½ï¿½ï¿½ï¿½
+	public NoScrollViewPager mNoScrollViewPager;//ï¿½ï¿½ï¿½ï¿½ï¿½ViewPager
+	RadioGroup mRadioGroup;//ï¿½×²ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½
+	RadioButton rbHome;//Ã¿Ò»ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½
 	RadioButton rbNews;
 	RadioButton rbSmart;
 	RadioButton rbGov;
 	RadioButton rbSet;
-	//ViewPagerµÄadapterÏà¹Ø
+	//ViewPagerï¿½ï¿½adapterï¿½ï¿½ï¿½
 	ArrayList<BaseBottomButtonPager> mListBottomButtonPager;
 	
-	//¼ÇÂ¼µ±Ç°ÔÚÄÄÒ»Ò³
+	//ï¿½ï¿½Â¼ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ò»Ò³
 	int mCurrentPagerNum = 0;
 	
 	@Override
@@ -47,7 +49,10 @@ public class ContentFragment extends BaseFragment {
 		super.initData();
 		mNoScrollViewPager = (NoScrollViewPager) mView.findViewById(R.id.vp_bottom);
 		mListBottomButtonPager = new ArrayList<BaseBottomButtonPager>();
-		mListBottomButtonPager.add(new HomePager(mActivity));
+		
+		HomePager homePager = new HomePager(mActivity);
+		homePager.initData();
+		mListBottomButtonPager.add(homePager);
 		mListBottomButtonPager.add(new NewsPager(mActivity));
 		mListBottomButtonPager.add(new SmartPager(mActivity));
 		mListBottomButtonPager.add(new GovPager(mActivity));
@@ -55,7 +60,7 @@ public class ContentFragment extends BaseFragment {
 		mNoScrollViewPager.setAdapter(new MyPagerAdapter());
 		
 		mCurrentPagerNum = 0;
-		mNoScrollViewPager.setCurrentItem(mCurrentPagerNum);
+		mNoScrollViewPager.setCurrentItem(mCurrentPagerNum,false);
 		
 		mRadioGroup = (RadioGroup) mView.findViewById(R.id.rg_bottom);
 		mRadioGroup.check(R.id.rb_home);
@@ -66,7 +71,7 @@ public class ContentFragment extends BaseFragment {
 		rbGov = (RadioButton) mView.findViewById(R.id.rb_gov);
 		rbSet = (RadioButton) mView.findViewById(R.id.rb_set);
 		
-		//ÉèÖÃ¼àÌýÊÂ¼þ£¬°üÀ¨ÏÂÃæ°´Å¥ºÍviewPagerÒ³Ãæ±ä»¯
+		//ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ°´Å¥ï¿½ï¿½viewPagerÒ³ï¿½ï¿½ä»¯
 		initListener();
 	}
 	
@@ -97,7 +102,7 @@ public class ContentFragment extends BaseFragment {
 			// TODO Auto-generated method stub	
 			BaseBottomButtonPager pager = mListBottomButtonPager.get(position);
 			container.addView(pager.mView);
-			// pager.initData();// ³õÊ¼»¯Êý¾Ý.... ²»Òª·ÅÔÚ´Ë´¦³õÊ¼»¯Êý¾Ý, ·ñÔò»áÔ¤¼ÓÔØÏÂÒ»¸öÒ³Ãæ
+			// pager.initData();// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.... ï¿½ï¿½Òªï¿½ï¿½ï¿½Ú´Ë´ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ò³ï¿½ï¿½
 			return pager.mView;
 		}
 
@@ -107,6 +112,8 @@ public class ContentFragment extends BaseFragment {
     }
 	
 	private void initListener() {
+		
+    //ï¿½Ð»ï¿½ï¿½Â±ï¿½ä»¯
 		mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			
 			@Override
@@ -116,16 +123,16 @@ public class ContentFragment extends BaseFragment {
 					mNoScrollViewPager.setCurrentItem(0,false);
 					break;
 				case R.id.rb_news:
-					mNoScrollViewPager.setCurrentItem(1, false);// ÉèÖÃµ±Ç°Ò³Ãæ
+					mNoScrollViewPager.setCurrentItem(1, false);// ï¿½ï¿½ï¿½Ãµï¿½Ç°Ò³ï¿½ï¿½
 					break;
 				case R.id.rb_smart:
-					mNoScrollViewPager.setCurrentItem(2, false);// ÉèÖÃµ±Ç°Ò³Ãæ
+					mNoScrollViewPager.setCurrentItem(2, false);// ï¿½ï¿½ï¿½Ãµï¿½Ç°Ò³ï¿½ï¿½
 					break;
 				case R.id.rb_gov:
-					mNoScrollViewPager.setCurrentItem(3, false);// ÉèÖÃµ±Ç°Ò³Ãæ
+					mNoScrollViewPager.setCurrentItem(3, false);// ï¿½ï¿½ï¿½Ãµï¿½Ç°Ò³ï¿½ï¿½
 					break;
 				case R.id.rb_set:
-					mNoScrollViewPager.setCurrentItem(4, false);// ÉèÖÃµ±Ç°Ò³Ãæ
+					mNoScrollViewPager.setCurrentItem(4, false);// ï¿½ï¿½ï¿½Ãµï¿½Ç°Ò³ï¿½ï¿½
 					break;
 				default:
 					break;
@@ -133,6 +140,36 @@ public class ContentFragment extends BaseFragment {
  			}
 		});
 		
+		//Pagerï¿½ä»¯
+		mNoScrollViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+			
+			@Override
+			public void onPageSelected(int arg0) {
+				// TODO Auto-generated method stub
+				mCurrentPagerNum = arg0;
+				mListBottomButtonPager.get(arg0).initData();
+				
+			}
+			
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+	}
+	
+	
+	public BaseBottomButtonPager getCurrentPager()
+	{
+		return mListBottomButtonPager.get(mCurrentPagerNum);
 	}
 	
 	

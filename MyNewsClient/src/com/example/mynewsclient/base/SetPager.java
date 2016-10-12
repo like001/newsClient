@@ -13,7 +13,7 @@ public class SetPager extends BaseBottomButtonPager{
 
 	@Override
 	public void initData() {
-		mTextView.setText("ÉèÖÃ");
+		mTextView.setText("è®¾ç½®");
 		//mFrameLayout.setBackgroundResource(R.drawable.girl3);
 	}
 
