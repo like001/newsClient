@@ -4,14 +4,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.example.mynewsclient.R;
+import com.example.mynewsclient.base.NewsPager;
+import com.example.mynewsclient.base.menudetail.NewsDetailPager;
 import com.example.mynewsclient.domain.NewsData.NewsMenuData;
+import com.example.mynewsclient.utils.NewsPagerUtils;
 import com.example.mynewsclient.utils.PrefUtils;
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnItemClick;
 
 import android.R.string;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -22,6 +30,8 @@ public class LeftFragment extends BaseFragment {
 	
 	String TAG = "LeftFragment";
 	ListView lvLeft;
+	ArrayList<NewsMenuData> mListData;
+	
 	
 	@Override
 	View initViews() {
@@ -37,14 +47,36 @@ public class LeftFragment extends BaseFragment {
 	void initData() {
 		// TODO Auto-generated method stub
 		super.initData();
+		initListener();
 		
 	}
 	
+	private void initListener() {
+		lvLeft.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				if(mListData!=null)
+				{
+					String name = mListData.get(arg2).title;
+					NewsPager newsPager = NewsPagerUtils.getNewsPager();
+				    if(newsPager !=null)
+				    {
+				    	newsPager.changeMenuDetailPager(name);
+				    }
+				}
+				
+			}
+		});
+		
+	}
+
+
 	//设置侧边栏的选项
 	public void initLeftLV(final ArrayList<NewsMenuData> list)
 	{
-		PrefUtils.setBoolean(mActivity, PrefUtils.LEFT_INITED, true);
 		Log.e(TAG, "initLeftLV");
+		mListData = list;
 		lvLeft.setAdapter(new BaseAdapter() {
 			
 			@Override
@@ -79,5 +111,7 @@ public class LeftFragment extends BaseFragment {
 		
 	
 }
+	
+	
 
 }

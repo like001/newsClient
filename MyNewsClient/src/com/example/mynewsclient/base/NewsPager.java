@@ -12,6 +12,7 @@ import com.example.mynewsclient.domain.NewsData.NewsMenuData;
 import com.example.mynewsclient.global.GlobalContants;
 import com.example.mynewsclient.pragment.ContentFragment;
 import com.example.mynewsclient.pragment.LeftFragment;
+import com.example.mynewsclient.utils.NewsPagerUtils;
 import com.example.mynewsclient.utils.PrefUtils;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
@@ -32,6 +33,7 @@ public class NewsPager extends BaseBottomButtonPager{
 	private NewsData mNewsData;
 	ContentFragment contentFragment;
 	MainActivity mainActivity;
+	Boolean leftIsInited = false;
 	public NewsPager(Activity activity) {
 		super(activity);
 		mainActivity=(MainActivity)activity;
@@ -43,7 +45,7 @@ public class NewsPager extends BaseBottomButtonPager{
 	public void initData() {
 		mTextView.setText("新闻");
 		getDataFromServer();		
-		
+		NewsPagerUtils.setNewsPager(this);
 
 	}
 	
@@ -72,29 +74,42 @@ public class NewsPager extends BaseBottomButtonPager{
 				//得到javabean之后的处理
 				if(mNewsData !=null )
 				{
-					//初始化左边侧边栏
-					//if(! PrefUtils.getBoolean(mActivity, PrefUtils.LEFT_INITED, false))
-					//{
-						initSlidingMenuData();
-					//}
-					
 					//展示第一页content内容
-					changeMenuDetailPager(mNewsData.data.get(0).title);
+					changeMenuDetailPager(mNewsData.data.get(0).title);	
+					//初始化左边侧边栏
+					if(!leftIsInited)
+					{
+						initSlidingMenuData();
+						leftIsInited= true;
+					}					
 					
 				}
 			}
 		});
 	}
 	
+	//点击侧边栏之后，用于修改页面
 	public void changeMenuDetailPager(String name)
 	{
 		BaseMenuDetailPager baseMenuDetailPager = 
-				BaseMenuDetailFactory.createPager(mActivity, name);	
-		NewsPager newsPager= (NewsPager) contentFragment.getCurrentPager();
-		newsPager.mFrameLayout.removeAllViews();
-		newsPager.mFrameLayout.setBackgroundColor(Color.CYAN);
-		newsPager.mFrameLayout.addView(baseMenuDetailPager.mView);
-		
+				BaseMenuDetailFactory.createPager(mActivity, name,mNewsData);	
+			BaseBottomButtonPager pager= contentFragment.getCurrentPager();
+			//必须为新闻选项时才能切换这个页面
+			if(pager.getClass() == this.getClass())
+			{
+			pager.mFrameLayout.removeAllViews();
+			pager.mFrameLayout.setBackgroundResource(0);
+			if(baseMenuDetailPager!=null)
+			{
+				baseMenuDetailPager.initData();
+				pager.mFrameLayout.addView(baseMenuDetailPager.mView);
+			}	
+			}
+			else
+			{
+				Toast.makeText(mainActivity, "非法", Toast.LENGTH_SHORT).show();
+			}
+					
 	}
 	
 	//将返回json保存到javabean
@@ -107,7 +122,7 @@ public class NewsPager extends BaseBottomButtonPager{
 	//得到侧边栏数据之后就可以进行初始化操作了
 	public void initSlidingMenuData()
 	{
-		Log.e(TAG, "initSlidingMenuData");
+		Log.v(TAG, "initSlidingMenuData");
 		MainActivity mainActivity = (MainActivity)mActivity;
 		LeftFragment leftFragment = mainActivity.getLeftMenuFragment();
 		leftFragment.initLeftLV(mNewsData.data);

@@ -106,9 +106,6 @@ public class ContentFragment extends BaseFragment {
 			return pager.mView;
 		}
 
-
-    	
-		
     }
 	
 	private void initListener() {
